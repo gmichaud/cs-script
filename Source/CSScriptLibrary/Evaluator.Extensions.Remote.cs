@@ -110,14 +110,8 @@ namespace CSScriptLibrary
             public static IEvaluator CreateEvaluator(RemoteLoadingContext context) //must be static to ensure the instance is created in the calling AppDomain
             {
                 IEvaluator eval;
-                if (context.evaluatorType == typeof(MonoEvaluator))
-                    eval = CSScript.MonoEvaluator;
-                else if (context.evaluatorType == typeof(CodeDomEvaluator))
+                if (context.evaluatorType == typeof(CodeDomEvaluator))
                     eval = CSScript.CodeDomEvaluator;
-#if net45
-                else if (context.evaluatorType == typeof(RoslynEvaluator))
-                    eval = CSScript.RoslynEvaluator;
-#endif
                 else
                     throw new Exception("Unknown evaluator type: " + context.evaluatorType.FullName);
 

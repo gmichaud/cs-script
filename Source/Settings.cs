@@ -38,11 +38,9 @@ using System.IO;
 
 using System.Threading;
 using System.Xml;
-using System.Drawing.Design;
 
 using System.ComponentModel;
 using System.Text;
-using System.Windows.Forms;
 using System.Reflection;
 using System.Linq;
 using System.Diagnostics;

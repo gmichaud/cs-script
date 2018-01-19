@@ -177,10 +177,6 @@ namespace CSScriptLibrary
             {
                 switch (CSScript.EvaluatorConfig.Engine)
                 {
-#if net45
-                    case EvaluatorEngine.Roslyn: return RoslynEvaluator;
-#endif
-                    case EvaluatorEngine.Mono: return MonoEvaluator;
                     case EvaluatorEngine.CodeDom: return CodeDomEvaluator;
                     default: return null;
                 }
@@ -199,28 +195,6 @@ namespace CSScriptLibrary
             }
             return null;
         }
-
-        /// <summary>
-        /// Global instance of <see cref="CSScriptLibrary.MonoEvaluator"/>. This object is to be used for
-        /// dynamic loading of the  C# code by using Mono "compiler as service".
-        /// <para>If you need to use multiple instances of th evaluator then you will need to call 
-        /// <see cref="CSScriptLibrary.IEvaluator"/>.Clone().</para>
-        /// <para>For the majority of the CS-Script script engine hosting scenarios the Mono compiler
-        /// is a preferred runtime. The major advantage is the compilation speed and superior (comparing to CodeDOM)
-        /// memory management.</para>
-        /// </summary>
-        /// <value>The <see cref="CSScriptLibrary.MonoEvaluator"/> instance.</value>
-        static public MonoEvaluator MonoEvaluator
-        {
-            get
-            {
-                if (EvaluatorConfig.Access == EvaluatorAccess.AlwaysCreate)
-                    return (MonoEvaluator)monoEvaluator.Value.Clone();
-                else
-                    return monoEvaluator.Value;
-            }
-        }
-        static Lazy<MonoEvaluator> monoEvaluator = new Lazy<MonoEvaluator>();
     }
 
     /// <summary>

@@ -39,33 +39,7 @@ namespace csscript
             catch { }
         }
     }
-
-    internal class LinuxSystemWideLock : ISystemWideLock, IDisposable
-    {
-        Mono.Unix.FileMutex mutex;
-
-        public LinuxSystemWideLock(string file, string context)
-        {
-            mutex = new Mono.Unix.FileMutex(file, context);
-        }
-
-        public bool Wait(int millisecondsTimeout)
-        {
-            return mutex.Wait(millisecondsTimeout);
-        }
-
-        public void Dispose()
-        {
-            Release();
-        }
-
-        public void Release()
-        {
-            try { mutex.Release(); }
-            catch { }
-        }
-    }
-
+    
     internal class SystemWideLock : ISystemWideLock, IDisposable
     {
         ISystemWideLock mutex;
@@ -74,17 +48,8 @@ namespace csscript
 
         public SystemWideLock(string file, string context)
         {
-            bool isLinux = (Environment.OSVersion.Platform == PlatformID.Unix);
-
-            if (isLinux)
-            {
-                mutex = new LinuxSystemWideLock(file, context);
-            }
-            else
-            {
-                file = file.ToLower(CultureInfo.InvariantCulture);
-                mutex = new WinSystemWideLock("" + context + "." + CSSUtils.GetHashCodeEx(file));
-            }
+            file = file.ToLower(CultureInfo.InvariantCulture);
+            mutex = new WinSystemWideLock("" + context + "." + CSSUtils.GetHashCodeEx(file));
         }
 
         public bool Wait(int millisecondsTimeout)

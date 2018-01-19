@@ -47,7 +47,6 @@ using System.CodeDom.Compiler;
 using System.Globalization;
 using System.Diagnostics;
 using Microsoft.CSharp;
-using System.Windows.Forms;
 using System.Collections;
 
 namespace csscript

@@ -47,7 +47,6 @@ using System.CodeDom.Compiler;
 using System.Security;
 using System.Security.Permissions;
 using System.Security.Policy;
-using System.Windows.Forms;
 
 namespace CSScriptLibrary
 {
